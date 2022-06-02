@@ -1,0 +1,30 @@
+{
+  "name": "cesnet/simplesamlphp-module-campususerpass",
+  "type": "simplesamlphp-module",
+  "keywords": ["simplesamlphp"],
+  "license": "BSD-3-Clause",
+  "authors": [
+      {
+          "name": "Dominik Baranek",
+          "email": "baranek@ics.muni.cz"
+      }
+  ],
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "simplesamlphp/composer-module-installer": "~1.0",
+    "simplesamlphp/simplesamlphp": "^1.19"
+  },
+  "config": {
+    "allow-plugins": {
+      "simplesamlphp/composer-module-installer": true
+    },
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "SimpleSAML\\Module\\campusmultiauth\\": "lib/"
+    }
+  }
+}
