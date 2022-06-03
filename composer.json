@@ -12,7 +12,9 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "simplesamlphp/composer-module-installer": "~1.0",
-    "simplesamlphp/simplesamlphp": "^1.19"
+    "simplesamlphp/simplesamlphp": "^1.19",
+    "ext-soap": "*",
+    "ext-simplexml": "*"
   },
   "config": {
     "allow-plugins": {
