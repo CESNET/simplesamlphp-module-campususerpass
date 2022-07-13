@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":automergeBranch",
+    ":automergeLinters",
+    ":automergePatch",
+    ":automergeTesters",
+    ":automergeTypes",
+    ":enableVulnerabilityAlertsWithLabel(security)",
+    ":maintainLockFilesWeekly",
+    ":pinOnlyDevDependencies",
+    ":prNotPending",
+    ":rebaseStalePrs",
+    ":semanticCommits",
+    ":widenPeerDependencies",
+    "npm:unpublishSafe"
+  ],
+  "composerIgnorePlatformReqs": ["simplexml", "soap"],
+  "stabilityDays": 3,
+  "transitiveRemediation": true
+}
