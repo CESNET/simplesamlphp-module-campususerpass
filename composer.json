@@ -1,16 +1,18 @@
 {
   "name": "cesnet/simplesamlphp-module-campususerpass",
   "type": "simplesamlphp-module",
-  "keywords": ["simplesamlphp"],
-  "license": "BSD-3-Clause",
+  "keywords": [
+    "simplesamlphp"
+  ],
+  "license": "BSD-2-Clause",
   "authors": [
-      {
-          "name": "Dominik Baranek",
-          "email": "baranek@ics.muni.cz"
-      }
+    {
+      "name": "Dominik Baranek",
+      "email": "baranek@ics.muni.cz"
+    }
   ],
   "require": {
-    "php": "^7.4 || ^8.0",
+    "php": "^7.4",
     "simplesamlphp/composer-module-installer": "~1.0",
     "simplesamlphp/simplesamlphp": "^1.19",
     "ext-soap": "*",
@@ -28,5 +30,8 @@
     "psr-4": {
       "SimpleSAML\\Module\\campusmultiauth\\": "lib/"
     }
+  },
+  "require-dev": {
+    "symplify/easy-coding-standard": "^11.0"
   }
 }

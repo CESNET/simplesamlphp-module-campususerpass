@@ -8,7 +8,7 @@ First, you need to define and configure the authsource in authsources.php file. 
 
     'campus-userpass' => [
         'campusUserPass:ECPAuth',
-        
+
         'sp' => 'default-sp',
         'ecpIdpUrl' => 'https://ucn.id.muni.cz/ms-ucnmuni/saml2/idp/SSOService.php',
         'expectedIssuer' => 'https://ics.id.muni.cz/ms-ucnmuni/idp'

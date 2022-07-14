@@ -24,6 +24,7 @@ use SimpleXMLElement;
 class ECPAuth extends UserPassBase
 {
     private $sp;
+
     private $ecpIdpUrl;
 
     public function __construct($info, $config)
@@ -48,19 +49,20 @@ class ECPAuth extends UserPassBase
 
     public function authenticate(&$state)
     {
-        $state[ECPAuth::AUTHID] = $this->getAuthId();
+        $state[self::AUTHID] = $this->getAuthId();
         $id = State::saveState($state, self::STAGEID);
 
-        $source = Source::getById($state[ECPAuth::AUTHID]);
+        $source = Source::getById($state[self::AUTHID]);
         if ($source === null) {
-            throw new \Exception(
-                'Could not find authentication source with id ' . $state[UserPassBase::AUTHID]
-            );
+            throw new \Exception('Could not find authentication source with id ' . $state[UserPassBase::AUTHID]);
         }
 
         if (array_key_exists('username', $_POST)) {
             $username = $_POST['username'];
-        } elseif ($source->getRememberUsernameEnabled() && array_key_exists($source->getAuthId() . '-username', $_COOKIE)) {
+        } elseif ($source->getRememberUsernameEnabled() && array_key_exists(
+            $source->getAuthId() . '-username',
+            $_COOKIE
+        )) {
             $username = $_COOKIE[$source->getAuthId() . '-username'];
         } elseif (isset($state['core:username'])) {
             $username = (string) $state['core:username'];
@@ -85,7 +87,7 @@ class ECPAuth extends UserPassBase
                 $sessionHandler = \SimpleSAML\SessionHandler::getSessionHandler();
                 $params = $sessionHandler->getCookieParams();
 
-                if (isset($_REQUEST['remember_username']) && $_REQUEST['remember_username'] == 'Yes') {
+                if (isset($_REQUEST['remember_username']) && $_REQUEST['remember_username'] === 'Yes') {
                     $params['expire'] = time() + 31536000;
                 } else {
                     $params['expire'] = time() - 300;
@@ -101,7 +103,7 @@ class ECPAuth extends UserPassBase
                 $errorParams = $e->getParameters();
                 $state['error'] = [
                     'code' => $errorCode,
-                    'params' => $errorParams
+                    'params' => $errorParams,
                 ];
                 $id = State::saveState($state, UserPassBase::STAGEID);
             }
@@ -111,7 +113,10 @@ class ECPAuth extends UserPassBase
         }
 
         $url = Module::getModuleURL('campusMultiauth/selectsource.php');
-        HTTP::redirectTrustedURL($url, ['AuthState' => $id, 'wrongUserPass' => true]);
+        HTTP::redirectTrustedURL($url, [
+            'AuthState' => $id,
+            'wrongUserPass' => true,
+        ]);
     }
 
     protected function login($username, $password)
@@ -128,11 +133,7 @@ class ECPAuth extends UserPassBase
         );
 
         $xmlBody = $xml->addChild('S:Body');
-        $xmlRequest = $xmlBody->addChild(
-            'samlp:AuthnRequest',
-            null,
-            'urn:oasis:names:tc:SAML:2.0:protocol'
-        );
+        $xmlRequest = $xmlBody->addChild('samlp:AuthnRequest', null, 'urn:oasis:names:tc:SAML:2.0:protocol');
         $xmlRequest->addAttribute('ID', '' . rand() . '');
         $xmlRequest->addAttribute('IssueInstant', '' . gmdate('Y-m-d\TH:i:s\Z', time()) . '');
         $xmlRequest->addAttribute('Version', '2.0');
