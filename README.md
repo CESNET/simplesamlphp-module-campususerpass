@@ -1,5 +1,7 @@
 # simplesamlphp-module-campususerpass
 
+**REPOSITORY HAS BEEN MOVED TO: https://gitlab.ics.muni.cz/perun-proxy-aai/simplesamlphp/simplesamlphp-module-campususerpass**
+
 This module extends authsource`SimpleSAML\Module\core\Auth\UserPassBase`. Thanks to this module, you can use [ECP](http://docs.oasis-open.org/security/saml/Post2.0/saml-ecp/v2.0/saml-ecp-v2.0.html) to log in the user. To achieve this, you just need to configure the authsource.
 
 ## Authsources configuration
